@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+
+{% block title %}
+  	<h2> {{p.state.title}}</h2>
+{%endblock%}
+{% block content %}
+    <p> Actualmente te encuentras en el estado de Definiciones Datos Asignatura. Estado en el cual definirás los aspectos generales de tu programa, ya sea nombre de la asignatura, TEL, requisitos, entre otros.
+      <br>Recuerda llevar constancia de tu trabajo marcando si ya está finalizado o si aún sigue en modificación. Ya que si no lo indicas no podrás seguir avanzando.</br>
+</p>
+{% endblock %}
+<br>
+{%block drive%}
+<li><strong>Documento en Drive </strong><td><a href="{{p.url}}"> <span class="glyphicon glyphicon-cloud"></span></a></td></li>
+<br>
+{%endblock%}
+{%block recursosJefe%}
+<br>
+{%if recursosJefe%}
+<table class="table-recursos table-striped">
+<thead>
+                        <tr>
+                            <th>Nombre Recurso</th>
+                            <th>Descripción</th>
+                            <th>Archivo</th>
+
+                        </tr>
+                    </thead> 
+                    <tbody>
+                         {%for r in recursosJefe%}
+                        <tr>
+                            <td>{{r.titulo_recurso}}</td></a>
+                            <td>{{r.descripcion_recurso}}</td>
+                           <td><a href="/files/serve/{{r.recurso}}"><span class="glyphicon glyphicon-paperclip"></a></span></td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+</table>
+{%else%}
+<h4>No hay recursos de formulación para este estado</h4>
+{%endif%}
+{%endblock%}
+  {%block defEstado%}
+ <button type="button"   class="btn btn-info" data-toggle="modal" data-target="#myModal">
+                        Guardar avance
+                        </button>
+ 
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Guardar Avance</h4>
+                              </div>
+                              <div class="modal-body">
+                                <p>¿En qué estado se encuentra la definición de datos de asignatura?</p>
+                                    <form id="defEstado"  class="form-horizontal" action="/definicionesGenerales/{{p.id}}/" method="POST">
+                                    {% csrf_token %}
+                                    
+                                    <p><input type="radio" name="optionsRadios"  value="option2"> Finalizado</p>
+                                    <p><input type="radio" name="optionsRadios"  value="option1"> Aún Modificando</p>
+                                    <button class="btn btn-success" type="submit">Guardar</button>
+                                </form>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                               
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+  {%endblock%}          
+
+{%block estados%}
+  	<li class="activo">Definiciones Generales</li>
+    <li class="disabled">Definicion de Contribución al Perfil de Egreso  </li>
+    <li class="disabled">Definición Resultados de Aprendizaje</li>
+    <li class="disabled">Estrategias de Ensenanza y de Aprendizaje</li>
+    <li class="disabled">Definicion de Clase a Clase</li>
+    <li class="disabled">Análisis de evaluaciones asociadas</li>
+    <li class="disabled">Verificación Coherencia y Completitud</li>
+    <li class="disabled">Definición de Aspectos Administrativos</li>
+    <li class="disabled">Definición de Recursos de Aprendizaje</li>
+    <li class="disabled">Aprobación Línea</li>
+    <li class="disabled">Fast Track</li>
+    <li class="disabled">Análisis Programa por Jefe de Carrera</li>
+    <li class="disabled">Aprobación Programa por Jefe de Carrera</li>
+{%endblock%}
+

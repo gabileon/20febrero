@@ -1,0 +1,123 @@
+{% load bootstrap_tags %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Formulapp - Principal Profesor</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="../../favicon.ico">
+        <script type="text/javascript" src="/media/js/jquery.js"></script>
+        <script type="text/javascript" src="/media/js/bootstrap.js"></script>
+        <link rel="stylesheet/less" href="/media/less/style.less">
+        <script type="text/javascript" src="/media/js/less-1.4.1.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-static-top" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/principalPL/">Formulapp</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li ><a href="/principalPL/">Programas</a></li>
+                <li class="active"><a href="/fechasProfe/">Eventos</a></li>
+                <li><a href="/recursosProfe/">Recursos de Formulación</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuración<span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="/miperfilProfesor/">Mi Perfil</a></li>
+                      <li><a href="/roles/{{yo.id}}">Cambiar de Rol</a></li>
+                  </ul>
+                </li>
+              </ul>     
+              <ul>
+                <p class="bienvenido">Bienvenido <strong>{{username}}</strong> <a href="/logout/"><span class="glyphicon glyphicon-log-out"></span></a></p>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </nav>
+
+
+ <div class="row">  
+      <div class="panel panel-primary">        
+        <div class="panel-heading">
+          <h3 class="panel-title">Eventos</h3>
+        </div>  
+        <div class="panel-body">
+          <p>A continuación se presentan todos los eventos a los cuales has sido invitado, ya sea por el Jefe de Carrera
+            o por el Coordinador. Se indica fecha y hora, lugar donde se reunirán y el anfitrión de la invitación.
+            Recuerda, que para tener mayor descripción de los eventos, puedes visualizarlos en <a href="https://www.google.com/calendar/">Google Calendar</a>.</p>
+          
+<br>
+
+          {%if eventos%}
+          <h3>Eventos de la línea</h3>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Título</th>
+                <th>Ubicación</th>
+                <th>Fecha</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+                        {%for e in eventos%}
+                        <tr>
+                            <td>{{e.summary}}</td>
+                            <td>{{e.location}}</td>
+                            <td>{{e.tipoEvento}}</td>
+                            <td>{{e.start}}</td>
+                             <td>{{e.descripcion}}</td>
+                        </tr>
+                        {%endfor%}
+
+                    </tbody>
+                </table>  
+        {%else%}
+        {%endif%}
+        {%if eventosGenerales%}
+        <h3>Eventos Generales</h3>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Título</th>
+                <th>Ubicacion</th>
+                <th>Fecha</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+                        {%for e in eventosGenerales%}
+                        <tr>
+                            <td>{{e.summary}}</td>
+                            <td>{{e.location}}</td>
+                            <td>{{e.start}}</td>
+                            <td>{{e.descripcion}}</td>
+                        </tr>
+                        {%endfor%}
+
+                    </tbody>
+                </table>  
+        {%else%}
+         <p><strong>No hay eventos </strong></p>
+        {%endif%}
+            </div>
+
+  </div> 
+<img class="expli"src="/media/img/eventos_1.jpg">
+    </body>    
+</html>
+
+            
+
+            

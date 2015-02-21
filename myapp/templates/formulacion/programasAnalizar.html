@@ -1,0 +1,110 @@
+{% load bootstrap_tags %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Formulapp - Principal Jefe Carrera</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="../../favicon.ico">
+        <script type="text/javascript" src="/media/js/jquery.js"></script>
+        <script type="text/javascript" src="/media/js/bootstrap.js"></script>
+        <link rel="stylesheet/less" href="/media/less/style.less">
+        <script type="text/javascript" src="/media/js/less-1.4.1.min.js"></script>
+          <script type="text/javascript" src="/media/js/highcharts.js"></script>
+          <script src="bootstrap-switch.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-static-top" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/principalPL/">Formulapp</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="/principal_jc/">Programas</a></li>
+                <li><a href="/prueba/">Indicadores</a></li>
+                <li><a href="/crearFechas/">Eventos</a></li>
+                  <li><a href="/reportesIndicacion/">Reportes de Indicación</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuración<span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="/miperfil/">Mi Perfil</a></li>
+                    <li><a href="/lineas/">Líneas de Asignatura</a></li>
+                    <li><a href="/recursos/">Recursos de Formulación</a></li>
+                    <li><a href="/roles/{{user.id}}">Cambiar de Rol</a></li>
+
+                  </ul>
+                </li>
+              </ul>     
+              <ul>
+                  <p class="bienvenido">Bienvenido <strong>{{username}}</strong> <a href="/logout/"><span class="glyphicon glyphicon-log-out"></span></a></p></p>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </nav>
+
+    <div class="row">
+        
+        <p class="ft">En esta sección se encuentran todos los programas que se encuentran en el estado de análisis del programa por parte del Jefe de Carrera. En el caso que el programa contenga indicaciones que usted
+          considere que debe corregir, se creará un reporte de indicaciones que tendrá que compartir con los 
+          responsables del programa.</p>
+        <div class="panel panel-primary">        
+            <div class="panel-heading">
+                <h3 class="panel-title">Programas por Analizar</h3>
+            </div>
+            <div class="panel-body">
+            	{%if programas%}
+            	<table class="table">
+                    <thead>
+                        
+                        <tr>
+                            <th>Asignatura</th>
+                            <th>Fecha Última Modificación</th>
+                            <th>Profesor Encargado</th>
+                            <th>Documento</th>
+                            <th>¿El programa presenta indicaciones que corregir?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for p in programas%}
+                        <tr>
+                            <td>{{p.asignatura.nombreAsig}}</td>
+                            <td>{{p.fechaUltimaModificacion}}</td>
+                            <td>{{p.profesorEncargado}}</td>
+                            <td><a class="glyphicon glyphicon-file" href="{{p.url}}"></a></td></span>
+                  
+                              <td>
+        
+                              <form action="/analisisPrograma/{{p.id}}/" method="POST">
+                                        {%csrf_token%}
+                                        {{ form|as_bootstrap}}
+                                         
+                              
+                            </td>
+                            <td>
+                              <button type="submit" class="btn btn-success"><strong>Guardar</strong></button>
+                                    </form> 
+                            </td>
+                            
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+                        
+             {%else%} 
+                <h4> No hay programas por analizar </h4>
+       		{%endif%} 
+            </div>
+        </div>
+    </div>        
+    </body>    
+</html>

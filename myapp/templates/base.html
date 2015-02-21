@@ -1,0 +1,107 @@
+{% load bootstrap_tags %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Formulapp - Principal Profesor</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="../../favicon.ico">
+        <script type="text/javascript" src="/media/js/jquery.js"></script>
+        <script type="text/javascript" src="/media/js/bootstrap.js"></script>
+        <link rel="stylesheet/less" href="/media/less/style.less">
+        <script type="text/javascript" src="/media/js/less-1.4.1.min.js"></script>
+            <script src="//oss.maxcdn.com/bootbox/4.2.0/bootbox.min.js"></script>
+            <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-static-top" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/principalPL/">Formulapp</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="/principalPL/">Programas</a></li>
+                <li><a href="/crearFechas/">Eventos</a></li>
+                <li><a href="/recursosProfe/">Recursos de Formulación</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuración<span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="/miperfilProfesor/">Mi Perfil</a></li>
+                     <li><a href="/cambiarRolProfe/">Cambiar Rol</a></li>
+                  </ul>
+                </li>
+              </ul>     
+              <ul>
+                     <p class="bienvenido">Bienvenido <strong>{{username}}</strong> <a href="/logout/"><span class="glyphicon glyphicon-log-out"></span></a></p>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </nav>
+
+ <div class="row">
+
+  <div class="col-md-5 col-md-push-2">
+    {% block title %}<h2> {{p.state.title}}</h2>{% endblock %}
+
+    {% block content %}
+
+
+    {% block foto %}      
+    {% endblock%}
+    {% block parrafo %}
+        <p> Actualmente te encuentras en el estado de Definición de Resultados de Aprendizaje. Los Resultados deben permitir observar un desempeño global verificable que integre elementos conceptuales, procedimentales y actitudinales. Debe resultar viable de alcanzar respecto de su posición en la malla curricular y el creditaje asignado. Además debe plantearse en coherencia con la contribución que puede estar realizando la asignatura al perfil de egreso de la carrera. </p>
+{% endblock%}
+{% endblock%}
+
+  
+
+  {%block drive%}
+   
+<li>Documento en Drive  <td><a href="{{p.url}}"> <span class="glyphicon glyphicon-cloud"></span></a></td></li>
+{%endblock%}
+  {%block defEstado%}
+  {%endblock%}
+  </div>
+
+
+
+
+<div class="col-md-5 col-md-push-2">
+ 
+          <h3 class="recursos ">Recursos para la Formulación </h3>
+          {%block recursosJefe%}
+          {%endblock%}
+</div>
+
+
+
+  <div class="col-md-2 col-md-pull-10">
+ 
+  	<h3 class="estados"> Estados </h3>
+   {%block estados%}
+
+    {%endblock%}
+  </div>
+
+
+
+</div>
+
+</body>    
+</html>
+
+
+
+
+
+
