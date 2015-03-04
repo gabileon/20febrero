@@ -295,6 +295,17 @@ def crearFechas(request):
     hoy = datetime.now()
     if perfilTemp.rol_actual == 'JC':
         eventos = Evento.objects.filter(anfitrion=request.user).order_by('-start')
+        paginator = Paginator(eventos, 6)
+        page = request.GET.get('page')
+        try:
+            contacts = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            contacts = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            contacts = paginator.page(paginator.num_pages)
+
         eventosInvitados = Evento.objects.filter(tipoEvento='jefe').order_by('-start')
         try:
             storage = Storage(CredentialsModel, 'id_user', request.user, 'credential')
@@ -387,7 +398,7 @@ def crearFechas(request):
                 status = "Completar todos los campos"
         else:
             form = AgregarEventoForm()
-        ctx = {'form':form, 'eventos': eventos, 'status': status, 'statusCord':statusCord,'username': request.user.username, 'eventosInvitados': eventosInvitados}
+        ctx = {'form':form, 'eventos': eventos, 'status': status, 'statusCord':statusCord,'username': request.user.username, 'eventosInvitados': eventosInvitados, 'contacts': contacts}
         return render (request, 'jefeCarrera/Eventos.html', ctx)
     else:
         return redirect ('/errorLogin/')
@@ -475,21 +486,6 @@ def editEventosView (request, id_evento):
                 if tipoEvento == 'coordinadores':
                     idCal = evento.id_calendar
                     eventt = service.events().get(calendarId='primary', eventId=idCal).execute()
-                    # linea = Linea.objects.get(nombreLinea = 'Proyectos')
-                    # try:
-                    #     coordinador = linea.coordinador.email
-                    # except:
-                    #     coordinador = None
-                    # if coordinador is not None:
-                    #     event = {
-                    #         'summary': '%s'%(summary),
-                    #         'start': {
-                    #             'dateTime': '%s'%(inicio),
-                    #           },
-                    #         'end': {
-                    #             'dateTime': '%s'%(fin),
-                    #           }}
-                    #     event['attendees'] =  [{'email': coordinador}]
                     coordinadores = UserProfile.objects.filter(rol_CL="CL")
                     event = {
                         'summary': '%s'%(summary),
@@ -573,7 +569,7 @@ def recursosView(request):
     perfilTemp = UserProfile.objects.get(user=userTemp.id)
     if perfilTemp.rol_actual == 'JC':
 
-        Recursos = Recurso.objects.all()
+        Recursos = Recurso.objects.all().order_by(-'fechaUltimaModificacion')
         paginator = Paginator(Recursos, 6)
         page = request.GET.get('page')
         try:
