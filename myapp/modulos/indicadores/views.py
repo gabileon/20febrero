@@ -95,3 +95,40 @@ def weather_chart_view(request):
      #Step 3: Send the chart object to the template.
   return render(request, 'indicadores/prueba.html', {'weatherchart': cht, 'username':username})
 
+
+def vista_adm(request):
+  user = User.objects.get(username=request.user.username)
+  ctx = {'user': userTemp}
+  return render(request, 'indicadores/vistaAdmin.html', ctx)
+
+
+def profesores(request):
+  profesores = Profesor.objects.all()
+  ctx = {'profesores': programas}
+  return render(request, 'indicadores/profesores.html', ctx)
+
+def jefeCarrera(request):
+  
+  form = RegisterForm()
+  if request.method == "POST":
+    form = RegisterForm(request.POST)
+    if form.is_valid():
+      username = form.cleaned_data['username']
+      name = form.cleaned_data['name']
+      last_name = form.cleaned_data['last_name']
+      email = form.cleaned_data['email']
+      password_one = form.cleaned_data['password_one']
+      password_two = form.cleaned_data['password_two']
+      newUser = User.objects.create_user(username=username, first_name=name, last_name=last_name, email=email, password=password_one)
+      newUser.save()
+      newUserProfile = UserProfile.objects.create(user=newUser, rol_CL='JC')
+      newUserProfile.save()
+      return redirect('/login')
+    else:
+      ctx = {'form':form}
+      return render(request,'presentacion/sign_up.html',ctx)
+  ctx = {'form':form}
+  return render(request,'presentacion/sign_up.html',ctx)
+
+
+

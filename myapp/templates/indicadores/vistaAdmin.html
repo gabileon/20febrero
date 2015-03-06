@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Formulapp - ADMIN</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="../../favicon.ico">
+        <script type="text/javascript" src="/media/js/jquery.js"></script>
+        <script type="text/javascript" src="/media/js/bootstrap.js"></script>
+        <link rel="stylesheet/less" href="/media/less/style.less">
+        <script type="text/javascript" src="/media/js/less-1.4.1.min.js"></script>
+          <script type="text/javascript" src="/media/js/highcharts.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-static-top" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/principal_jc/">Formulapp</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="/programas/">Programas</a></li>
+                <li><a href="/profesor/">Profesores</a></li>
+                <li><a href="/eventos/">Eventos</a></li>
+                <li><a href="/asignaturas/">Asignaturas</a></li>
+              </ul>     
+              <ul>
+                <p class="bienvenido">Bienvenido <strong>{{user.username}}</strong> <a href="/logout/"><span class="glyphicon glyphicon-log-out"></span></a></p>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </nav>
+    </body>    
+</html>
+
+            

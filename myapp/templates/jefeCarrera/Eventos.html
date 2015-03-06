@@ -67,7 +67,7 @@
           <h3 class="panel-title">Eventos</h3>
         </div>  
         <div class="panel-body">
-          {%if eventos%}
+          {%if contacts%}
           <table class="table">
             <thead>
               <tr>
@@ -82,7 +82,7 @@
               </tr>
             </thead>
             <tbody>
-                        {%for e in eventos%}
+                        {%for e in contacts%}
                         <tr>
                             <td>{{e.summary}}</td>
                             {%if e.tipoEvento == 'general'%}
@@ -101,6 +101,21 @@
                         </tr>
 
                         {%endfor%}
+                                    <div class="pagination">
+                <span class="step-links">
+                    {% if contacts.has_previous %}
+                        <a href="?page={{ contacts.previous_page_number }}">Previo</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Página {{ contacts.number }} de {{ contacts.paginator.num_pages }}.
+                    </span>
+
+                    {% if contacts.has_next %}
+                        <a href="?page={{ contacts.next_page_number }}">Próximo</a>
+                    {% endif %}
+                </span>
+            </div>
 
                     </tbody>
                 </table>  

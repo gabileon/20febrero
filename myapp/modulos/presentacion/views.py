@@ -56,7 +56,7 @@ def signup_view(request):
 			password_two = form.cleaned_data['password_two']
 			newUser = User.objects.create_user(username=username, first_name=name, last_name=last_name, email=email, password=password_one)
 			newUser.save()
-			newUserProfile = UserProfile.objects.create(user=newUser, rol_CL='CL')
+			newUserProfile = UserProfile.objects.create(user=newUser, rol_CL='JC')
 			newUserProfile.save()
 			return redirect('/login')
 		else:
@@ -116,4 +116,7 @@ def oauth2_view(request):
 	userTemp = User.objects.get(username=request.user.username)
 	perfilTemp = UserProfile.objects.get(user=userTemp.id)
 	ctx = {'perfil': perfilTemp}
-	return render(request,'presentacion/rol.html',ctx)
+	if perfilTemp.rol_actual == 'ADMIN':
+		return HttpResponseRedirect('/admin')
+	else:
+		return render(request,'presentacion/rol.html',ctx)

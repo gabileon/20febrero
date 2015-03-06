@@ -569,7 +569,7 @@ def recursosView(request):
     perfilTemp = UserProfile.objects.get(user=userTemp.id)
     if perfilTemp.rol_actual == 'JC':
 
-        Recursos = Recurso.objects.all().order_by(-'fechaUltimaModificacion')
+        Recursos = Recurso.objects.all().order_by('-fechaUltimaModificacion')
         paginator = Paginator(Recursos, 6)
         page = request.GET.get('page')
         try:
