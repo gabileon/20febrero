@@ -116,7 +116,4 @@ def oauth2_view(request):
 	userTemp = User.objects.get(username=request.user.username)
 	perfilTemp = UserProfile.objects.get(user=userTemp.id)
 	ctx = {'perfil': perfilTemp}
-	if perfilTemp.rol_actual == 'ADMIN':
-		return HttpResponseRedirect('/admin')
-	else:
-		return render(request,'presentacion/rol.html',ctx)
+	return render(request,'presentacion/rol.html',ctx)
